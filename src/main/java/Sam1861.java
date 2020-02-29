@@ -7,7 +7,7 @@ public class Sam1861 {
     static int[][] ROOM;
     static int START_NUM=0,MAX_CNT=0;
     static int[] dx = {1,-1,0,0} , dy={0,0,1,-1};
-    static int N;
+    static int N=0;
 
     public static void searchRoute(int x,int y,int cnt,int start){
         for(int i=0;i<4;i++){
@@ -18,15 +18,16 @@ public class Sam1861 {
                     searchRoute(nx,ny,++cnt,start);
                 }
             }
-            if(cnt==MAX_CNT){
-                if(ROOM[x][y]<START_NUM){
-                    START_NUM=ROOM[x][y];
-                }
-            }
-            if(cnt>MAX_CNT){
-                MAX_CNT=cnt;
+        }
+        //상하좌우로 더 못갈때니까 for 문 종료후
+        if(cnt==MAX_CNT){//최대수와 카운트수 같을때
+            if(start<START_NUM){ //시작넘버 작으면 교체 ROOM[x][y] 로 하면 안됨
                 START_NUM=start;
             }
+        }
+        if(cnt>MAX_CNT){
+            MAX_CNT=cnt;
+            START_NUM=start;
         }
 
     }
@@ -44,14 +45,15 @@ public class Sam1861 {
                     ROOM[i][j]=Integer.parseInt(str[j]);
                 }
             }
+            START_NUM=ROOM[0][0];
+            MAX_CNT=0;
             for(int i =0;i<N;i++){
                 for(int j=0;j<N;j++){
                     searchRoute(i,j,1,ROOM[i][j]);
                 }
             }
-            System.out.println("#"+printNum+++" "+START_NUM+" "+MAX_CNT);
-            START_NUM=0;
-            MAX_CNT=0;
+            System.out.println("#"+(printNum++)+" "+START_NUM+" "+MAX_CNT);
+
         }
     }
 }
