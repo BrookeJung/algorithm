@@ -50,6 +50,8 @@ public class Sam1861 {
                 }
             }
             System.out.println("#"+printNum+++" "+START_NUM+" "+MAX_CNT);
+            START_NUM=0;
+            MAX_CNT=0;
         }
     }
 }
