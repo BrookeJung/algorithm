@@ -1,4 +1,3 @@
-import javax.imageio.IIOException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,8 +7,8 @@ import java.util.StringTokenizer;
 public class Sam1953 {
 
     static int N, M, V, H, T, ANS, RUN; //맵xSize , 맵ySize , 맨홀x, 맨홀y , 소요시간
-    static int[] dx = {1, -1, 0, 0}, dy = {0, 0, 1, -1};
-    static int[][] dir = {{0, 0}, {0, 1, 2, 3}, {0, 1}, {2, 3}, {1, 2}, {0, 2}, {0, 3}, {1, 3}};
+    static int[] dx = {1, -1, 0, 0}, dy = {0, 0, 1, -1}; //하상우좌
+    static int[][] dir = {{0, 0}, {0, 1, 2, 3}, {0, 1}, {2, 3}, {1, 2}, {0, 2}, {0, 3}, {1, 3}}; // 0~7 pipe type
     static int[][] map, visited;
 
     public static void bfs() {
@@ -29,11 +28,11 @@ public class Sam1953 {
                     int ny = x + dy[n];
                     if (nx >= 0 && nx < N && ny >= 0 && ny < M) {
                         if (map[nx][ny] != 0 && visited[nx][ny] == 0) {
-                            if (isConnected(x,y,nx,ny,type)) {
+                            if (isConnected(x,y,nx,ny,type)) { //넘어갈부분이 연결되어있다면
+                                que.offer(new int[]{nx, ny});
                                 visited[nx][ny] = 1;
                                 ANS++;
                                 RUN++;
-                                que.offer(new int[]{nx, ny});
                             }
                         }
                     }
@@ -42,7 +41,7 @@ public class Sam1953 {
         }
     }
   /*
-   넘어갈 배관이 연결되는지 확인하는부분에서 막힘
+   넘어갈 배관이 연결되는지 확인하는부분
   */
     public static boolean isConnected(int x, int y, int nx, int ny , int type) {
         boolean bool = false;
@@ -53,6 +52,7 @@ public class Sam1953 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine().trim());
+        int cnt = 1;
         while (n-- > 0) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             N = Integer.parseInt(st.nextToken());
@@ -70,7 +70,7 @@ public class Sam1953 {
             }
             ANS = 0;
             bfs();
-
+            System.out.println("#"+(cnt++)+" "+ANS);
         }
 
     }
