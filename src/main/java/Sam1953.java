@@ -8,7 +8,7 @@ public class Sam1953 {
 
     static int N, M, V, H, T, ANS, RUN; //맵xSize , 맵ySize , 맨홀x, 맨홀y , 소요시간
     static int[] dx = {1, -1, 0, 0}, dy = {0, 0, 1, -1}; //하상우좌
-    static int[][] dir = {{0, 0}, {0, 1, 2, 3}, {0, 1}, {2, 3}, {1, 2}, {0, 2}, {0, 3}, {1, 3}}; // 0~7 pipe type
+    static int[][] dir = {{}, {0, 1, 2, 3}, {0, 1}, {2, 3}, {1, 2}, {0, 2}, {0, 3}, {1, 3}}; // 0~7 pipe type
     static int[][] map, visited;
 
     public static void bfs() {
