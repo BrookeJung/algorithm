@@ -18,7 +18,7 @@ public class Sam1953 {
         visited[V][H] = 1; //1 방문 - 0 미방문
         ANS++;
         RUN = 1;
-        while (!que.isEmpty() && RUN <= T) {
+        while (!que.isEmpty() && RUN < T) {
             for (int i = 0; i < que.size(); i++) {
                 int[] node = que.poll(); //deque- FIFO
                 int x = node[0];
@@ -29,7 +29,7 @@ public class Sam1953 {
                     int ny = x + dy[n];
                     if (nx >= 0 && nx < N && ny >= 0 && ny < M) {
                         if (map[nx][ny] != 0 && visited[nx][ny] == 0) {
-                            if (isConnected(n, x, y)) {
+                            if (isConnected(x,y,nx,ny,type)) {
                                 visited[nx][ny] = 1;
                                 ANS++;
                                 RUN++;
@@ -41,8 +41,10 @@ public class Sam1953 {
             }
         }
     }
-
-    public static boolean isConnected(int n, int x, int y) {
+  /*
+   넘어갈 배관이 연결되는지 확인하는부분에서 막힘
+  */
+    public static boolean isConnected(int x, int y, int nx, int ny , int type) {
         boolean bool = false;
         return bool;
     }
