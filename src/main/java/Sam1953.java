@@ -18,7 +18,8 @@ public class Sam1953 {
         ANS++;
         RUN = 1;
         while (!que.isEmpty() && RUN < T) {
-            for (int i = 0; i < que.size(); i++) {
+            int size = que.size(); //for문에 사이즈를 바로 넣으면 RUN++에 도달하지못한다
+            for (int i = 0; i < size ; i++) {
                 int[] node = que.poll(); //deque- FIFO
                 int x = node[0];
                 int y = node[1];
