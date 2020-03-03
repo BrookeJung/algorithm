@@ -24,28 +24,50 @@ public class Sam1953 {
                 int y = node[1];
                 int type = map[x][y]; //배관타입추출
                 for (int n = 0; n < dir[type].length; n++) {
-                    int nx = x + dx[n];
-                    int ny = x + dy[n];
+                    int num = dir[type][n];
+                    int nx = x + dx[num];
+                    int ny = y + dy[num];
                     if (nx >= 0 && nx < N && ny >= 0 && ny < M) {
                         if (map[nx][ny] != 0 && visited[nx][ny] == 0) {
-                            if (isConnected(x,y,nx,ny,type)) { //넘어갈부분이 연결되어있다면
+                            if (isConnected(nx, ny, num)) { //넘어갈부분이 연결되어있다면
                                 que.offer(new int[]{nx, ny});
                                 visited[nx][ny] = 1;
                                 ANS++;
-                                RUN++;
                             }
                         }
                     }
                 }
-            }
+            }RUN++;
         }
     }
-  /*
-   넘어갈 배관이 연결되는지 확인하는부분
-  */
-    public static boolean isConnected(int x, int y, int nx, int ny , int type) {
-        boolean bool = false;
-        return bool;
+
+    /*
+     넘어갈 배관이 연결되는지 확인
+    */
+    public static boolean isConnected(int nx, int ny, int num) { //num : 넘어간 방향 상>하 하>상 좌>우 우>좌
+        int con=0;
+        switch (num) {
+            case 0:
+                con = 1;
+                break;
+            case 1:
+                con = 0;
+                break;
+            case 2:
+                con = 3;
+                break;
+            case 3:
+                con = 2;
+                break;
+        }
+
+        int nextType = map[nx][ny];
+        for (int i = 0; i < dir[nextType].length; i++) {
+            if(dir[nextType][i]==con){
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -70,7 +92,7 @@ public class Sam1953 {
             }
             ANS = 0;
             bfs();
-            System.out.println("#"+(cnt++)+" "+ANS);
+            System.out.println("#" + (cnt++) + " " + ANS);
         }
 
     }
