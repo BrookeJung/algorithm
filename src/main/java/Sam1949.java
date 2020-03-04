@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-//day1-2
+//day1
 public class Sam1949 {
     static int[][] rand, visit;
     static int N, K, MAX_LENG; //N:땅가로세로길이 , K:깍을수있는수치 ,L :최장경로길이

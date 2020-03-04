@@ -1,7 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-//day1-1
+//day1
 public class Sam1861 {
    static int[][] ROOM;
     static int START_NUM=0,MAX_CNT=0;
