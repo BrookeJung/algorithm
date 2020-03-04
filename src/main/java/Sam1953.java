@@ -13,12 +13,12 @@ public class Sam1953 {
 
     public static void bfs() {
         LinkedList<int[]> que = new LinkedList<>();
-        que.offer(new int[]{V, H}); //root노드 enque
+        que.offer(new int[]{V, H});
         visited[V][H] = 1; //1 방문 - 0 미방문
         ANS++;
         RUN = 1;
         while (!que.isEmpty() && RUN < T) {
-            int size = que.size(); //for문에 사이즈를 바로 넣으면 RUN++에 도달하지못한다
+            int size = que.size();
             for (int i = 0; i < size ; i++) {
                 int[] node = que.poll(); //deque- FIFO
                 int x = node[0];
@@ -42,10 +42,7 @@ public class Sam1953 {
         }
     }
 
-    /*
-     넘어갈 배관이 연결되는지 확인
-    */
-    public static boolean isConnected(int nx, int ny, int num) { //num : 넘어간 방향 상>하 하>상 좌>우 우>좌
+    public static boolean isConnected(int nx, int ny, int num) { //상>하 하>상 좌>우 우>좌
         int con=0;
         switch (num) {
             case 0:
