@@ -1,10 +1,9 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+//day1-1
 public class Sam1861 {
-
-    static int[][] ROOM;
+   static int[][] ROOM;
     static int START_NUM=0,MAX_CNT=0;
     static int[] dx = {1,-1,0,0} , dy={0,0,1,-1};
     static int N=0;
@@ -19,13 +18,9 @@ public class Sam1861 {
                 }
             }
         }
-        //상하좌우로 더 못갈때니까 for 문 종료후
-        if(cnt==MAX_CNT){//최대수와 카운트수 같을때
-            if(start<START_NUM){ //시작넘버 작으면 교체 ROOM[x][y] 로 하면 안됨
-                START_NUM=start;
-            }
-        }
-        if(cnt>MAX_CNT){
+        if(cnt==MAX_CNT) {
+            START_NUM= Math.min(start,START_NUM);
+        }else if(cnt>MAX_CNT){
             MAX_CNT=cnt;
             START_NUM=start;
         }
