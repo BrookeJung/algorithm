@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
-
+//day2
 public class Sam1953 {
 
     static int N, M, V, H, T, ANS, RUN; //맵xSize , 맵ySize , 맨홀x, 맨홀y , 소요시간
