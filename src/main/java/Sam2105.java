@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-
+//day2
 public class Sam2105 {
     static int N, ANS;
     static int[][] map, visited;
