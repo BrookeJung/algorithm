@@ -1,8 +1,11 @@
+package week1.brookejung;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.StringTokenizer;
+
 //day2
 public class Sam1953 {
 
