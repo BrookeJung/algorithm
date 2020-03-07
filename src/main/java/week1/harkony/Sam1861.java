@@ -3,12 +3,13 @@ package week1.harkony;
 import java.util.Scanner;
 
 public class Sam1861 {
-    final static int dir[][] = { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+    final static int dir[][] = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
     static int[][] mat;
     static int[][] visit;
     static int[][] score;
 
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
         int Case = sc.nextInt();
         for (int loop = 0; loop < Case; loop++) {
