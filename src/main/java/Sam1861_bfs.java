@@ -1,5 +1,3 @@
-import sun.applet.Main;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -24,7 +22,7 @@ public class Sam1861_bfs {
                 for (int d = 0; d < 4; d++) {
                     int nx = x + dx[d];
                     int ny = y + dy[d];
-                    if (nx < 0 || ny < 0 || nx >= N || ny >= N) {
+                    if (isOutOfBound(nx,ny)) {
                         continue;
                     }
                     if (visit[nx][ny] == 1) {
@@ -40,6 +38,13 @@ public class Sam1861_bfs {
 
         }
     }
+
+    private static boolean isOutOfBound(int nx, int ny) {
+        if(nx < 0 || ny < 0 || nx >= N || ny >= N)
+            return true;
+        return false;
+    }
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int T = Integer.parseInt(br.readLine());
