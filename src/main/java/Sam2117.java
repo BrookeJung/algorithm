@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Sam2117 {
+    //week2
     static int N, M, ans; //N*N 맵 , M:지불가능금액 , ans : 집 갯수
     static int[][] map;
 
