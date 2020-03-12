@@ -38,7 +38,7 @@ public class Sam2382 {
     }
 
     private static Boolean IsOnDrug(int nx, int ny) {
-        if (nx == 0 || ny == 0 || nx == N || ny == N) {
+        if (nx == 0 || ny == 0 || nx == N-1 || ny == N-1) {
             return true;
         }
         return false;
@@ -75,6 +75,7 @@ public class Sam2382 {
             }
             calBugs();
             System.out.println("#"+(num++)+" "+bugs);
+            list.clear();
         }
     }
 
