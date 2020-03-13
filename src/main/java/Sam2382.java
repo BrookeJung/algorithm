@@ -33,6 +33,8 @@ public class Sam2382 {
         int ny = bu.y + dy[bu.dir];
         if (isOnDrug(nx, ny)) { //약품위에올라왔을때
             bu.cnt = bu.cnt / 2;
+            bu.x=nx;
+            bu.y=ny;
             bu.dir = turn.get(bu.dir);
         } else {
             if (map[nx][ny] == null) { //이전에 이칸에 군집 들어왔던적없다.
@@ -85,9 +87,9 @@ public class Sam2382 {
             }
             bugs = 0;
             //이동하기전에 일단 미생물 갯수대로 내림차순 정렬하자. -그러면 처음들어온 애 방향대로 나아가면 된다.
-            ClusterComparator com = new ClusterComparator();
-            Collections.sort(list, com);
             while (M-- > 0) {
+                ClusterComparator com = new ClusterComparator();
+                Collections.sort(list, com);
                 map=new bug[N][N];
                 int size = list.size();
                 for (int i = 0; i < size; i++) {
