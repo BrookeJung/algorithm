@@ -74,7 +74,6 @@ public class Sam2382 {
             N = Integer.parseInt(st.nextToken()); // N*N
             M = Integer.parseInt(st.nextToken()); // 격리시간
             K = Integer.parseInt(st.nextToken()); // 미생물 cluster 갯수
-            map = new bug[N][N];
             list = new ArrayList<>();
             while (K-- > 0) {
                 st = new StringTokenizer(br.readLine());
@@ -89,6 +88,7 @@ public class Sam2382 {
             ClusterComparator com = new ClusterComparator();
             Collections.sort(list, com);
             while (M-- > 0) {
+                map=new bug[N][N];
                 int size = list.size();
                 for (int i = 0; i < size; i++) {
                     if (list.get(i).cnt == 0) continue;
