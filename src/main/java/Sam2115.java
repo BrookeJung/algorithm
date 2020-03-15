@@ -56,7 +56,7 @@ public class Sam2115 {
                 int xp = list.get(j).x;
                 int yp = list.get(j).y;
 
-                if (x == xp && y + M > yp)
+                if (x == xp)
                     continue;
 
                 int sump = list.get(j).earn;
