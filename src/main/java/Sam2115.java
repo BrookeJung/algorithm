@@ -43,8 +43,8 @@ public class Sam2115 {
     }
 
 
-    public static int getAns() {
-        int max = list.get(0).earn;
+    public static void getAns() {
+         max = list.get(0).earn;
 
         for (int i = 0; i < list.size(); i++) {
 
@@ -64,7 +64,6 @@ public class Sam2115 {
                 max = Math.max(total, max);
             }
         }
-        return max;
     }
 
     public static void main(String[] args) throws IOException {
@@ -92,7 +91,8 @@ public class Sam2115 {
                     search(i, j, 0, 0, 0);
                 }
             }
-            System.out.println("#" + (num++) + " " + getAns());
+            getAns();
+            System.out.println("#" + (num++) + " " + max);
         }
     }
 }
