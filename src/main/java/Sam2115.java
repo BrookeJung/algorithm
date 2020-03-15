@@ -1,28 +1,70 @@
+
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 public class Sam2115 {
-    //day3 벌꿀채취
-    static int profit;
+    static int N, M, C;
     static int[][] map;
-    static int[] visit;
-    static int N, M, C; //N*N , 꿀통 수 , 일꾼당 채취가능 꿀량
-    static List<Spot> selects;
+    static List<Spot> list;
+    static int max;
 
-    static class Spot { //시작좌표, 꿀
+    static class Spot {
+
         int x;
         int y;
-        int sum;
+        int earn;
 
-        Spot(int x, int y, int sum) {
+        Spot(int x, int y, int earn) {
             this.x = x;
             this.y = y;
-            this.sum = sum;
+            this.earn = earn;
         }
+
+    }
+
+    public static void search(int x, int y, int limit, int sum, int benefit) {
+        if (limit == M) {
+            max = Math.max(max, benefit);
+            return;
+        }
+        search(x, y + 1, limit + 1, sum, benefit);
+        list.add(new Spot(x, y, benefit));
+        if (sum + map[x][y] <= C) { //용량 이내
+            sum += map[x][y];
+            benefit += (int) Math.pow(map[x][y], 2);
+            search(x, y + 1, limit + 1, sum, benefit);
+            list.add(new Spot(x, y, benefit));
+            max = 0;
+        }
+    }
+
+
+    public static int getAns() {
+        int max = list.get(0).earn;
+
+        for (int i = 0; i < list.size(); i++) {
+
+            int sum = list.get(i).earn;
+            int x = list.get(i).x;
+            int y = list.get(i).y;
+
+            for (int j = i + 1; j < list.size(); j++) {
+                int xp = list.get(j).x;
+                int yp = list.get(j).y;
+
+                if (x == xp && y + M > yp)
+                    continue;
+
+                int sump = list.get(j).earn;
+                int total = sum + sump;
+                max = Math.max(total, max);
+            }
+        }
+        return max;
     }
 
     public static void main(String[] args) throws IOException {
@@ -35,80 +77,22 @@ public class Sam2115 {
             M = Integer.parseInt(st.nextToken());
             C = Integer.parseInt(st.nextToken());
             map = new int[N][N];
-            visit = new int[N];
             for (int i = 0; i < N; i++) {
                 st = new StringTokenizer(br.readLine());
                 for (int j = 0; j < N; j++) {
                     map[i][j] = Integer.parseInt(st.nextToken());
                 }
             }
-            profit = 0;
-            selects = new ArrayList<>();
+
+            max = 0;
+            list = new ArrayList<>();
+
             for (int i = 0; i < N; i++) {
                 for (int j = 0; j < N - M + 1; j++) {
-                    getProfit(i, j);
+                    search(i, j, 0, 0, 0);
                 }
             }
-            getAns();
-            System.out.println("#" + (num++) + " " + profit);
-        }
-    }
-
-    public static void getProfit(int x, int y) {
-        int sum = 0;
-        int earn = 0;
-
-        for (int i = 0; i < M; i++) {
-            sum += map[x][y + i];
-            earn += (int) Math.pow(map[x][y + i], 2);
-        }
-        if (sum > C) {
-            visit = new int[M];
-            for (int i = 1; i < M; i++) {
-                dfs(x, y, 0, i, 0, 0, 0);
-                selects.add(new Spot(x, y, profit));
-                profit = 0;
-            }
-        } else {
-            selects.add(new Spot(x, y, earn));
-        }
-    }
-
-    public static void dfs(int x, int y, int cnt, int num, int sum, int earn, int start) {
-        if (cnt == num) {
-            profit = Math.max(profit, earn);
-            return;
-        }
-        for (int i = start; i < M; i++) {
-            if (visit[i] == 1) {
-                continue;
-            }
-            if (sum + map[x][y + 1] > C) {
-                continue;
-            }
-            visit[i] = 1;
-            dfs(x, y, cnt + 1, num, sum + map[x][y + 1], earn + (int) Math.pow(map[x][y + 1], 2), start + 1);
-            visit[i] = 0;
-        }
-    }
-
-    public static void getAns() {
-        profit = selects.get(0).sum;
-        for (int i = 0; i < selects.size(); i++) {
-            int proA = selects.get(i).sum;
-            int x = selects.get(i).x;
-            int y = selects.get(i).y;
-
-            for (int j = i + 1; j < selects.size(); j++) {
-                int xp = selects.get(j).x;
-                int yp = selects.get(j).y;
-                if (x == xp && y + M > yp) {
-                    continue;
-                }
-                int proB = selects.get(j).sum;
-                int sum = proA + proB;
-                profit = Math.max(sum, profit);
-            }
+            System.out.println("#" + (num++) + " " + getAns());
         }
     }
 }
