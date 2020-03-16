@@ -47,8 +47,7 @@ public class Sam4014   {
             search(x,y+1,map,same+1);
         }else if(map[x][y]<map[x][y+1]){ //1높아질때
             if(same>=X){
-                same=1;
-                search(x,y+1,map,same);
+                search(x,y+1,map,1);
             }
             return;
         }else{ //1낮아질때
@@ -64,7 +63,7 @@ public class Sam4014   {
                 }
             }
 
-            search(x,y+X,map,1);
+            search(x,y+X,map,0);//경사로 놓고 넘어갈때same0으로 초기화
         }
 
     }
