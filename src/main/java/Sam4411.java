@@ -7,12 +7,10 @@ import java.util.StringTokenizer;
 
 
 public class Sam4411 {
-    static int ans, N;
+    static int sword, N;
     static long K;
-    static List<Integer> cards;
 
     public static void main(String[] args) throws IOException {
-        cards = new ArrayList<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int T = Integer.parseInt(br.readLine());
         int num = 1;
@@ -20,27 +18,14 @@ public class Sam4411 {
             StringTokenizer st = new StringTokenizer(br.readLine());
             N = Integer.parseInt(st.nextToken());
             K = Long.parseLong(st.nextToken());
-            for (int i = 1; i < N + 1; i++) {
-                cards.add(i);
+            sword = 1; //f(1,k)=1 1번에서 시작
+            for (int i = 2; i < N + 1; i++) { //요세푸스 점화식 재귀로 해결하면 StackOverFlow
+                sword = (int) ((sword + K) % i + 1);
+//                System.out.println("카드수"+i+"sword"+sword);
             }
-            move();
-            System.out.println("#" + (num++) + " " + ans);
-            cards.clear();
+            System.out.println("#" + (num++) + " " + sword);
         }
     }
 
-    private static void move() {
-        if (cards.size() == 1) {
-            ans = cards.get(0);
-            return;
-        }
-        long repeat = K;
-        while (repeat-- > 0) {
-            int temp = cards.get(0);
-            cards.remove(0);
-            cards.add(temp);
-        }
-        cards.remove(0);
-        move();
-    }
+
 }
