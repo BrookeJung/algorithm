@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.StringTokenizer;
 
 public class Sam5295 {
@@ -10,7 +8,7 @@ public class Sam5295 {
     static int ans, N, row;
     static int[][] map;
     static boolean[] pick;
-    static List<Integer> elements1 , elements2;
+    static boolean[] ele1, ele2;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -48,27 +46,30 @@ public class Sam5295 {
     }
 
     private static boolean isSameElement() {
-        elements1 = new ArrayList<>();
-        elements2 = new ArrayList<>();
+        ele1= new boolean[N+1];
+        ele2= new boolean[N+1];
         int contain = 0;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < N; j++) {
+                if(!pick[j]){
+                    continue;
+                }
                 if (pick[j]) { //포함할 줄이다.
                     if (i == 0) { //첫번째 줄이다.
                         contain++;
-                        elements1.add(map[i][j]);
-                        elements2.add(map[i][j]);
+                        ele1[map[i][j]]=true;
+                        ele2[map[i][j]]=true;
                     } else if(i==1) {
-                        if(!elements1.contains(map[i][j])){
+                        if(!ele1[map[i][j]]){
                             return false;
                         }else{
-                            elements1.remove((Integer) map[i][j]);
+                            ele1[map[i][j]]=false;
                         }
                     } else{
-                        if(!elements2.contains(map[i][j])){
+                        if(!ele2[map[i][j]]){
                             return false;
                         }else{
-                            elements2.remove((Integer)map[i][j]);
+                            ele2[map[i][j]]=false;
                         }
                     }
                 }
