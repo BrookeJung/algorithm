@@ -34,11 +34,11 @@ public class Sam5644 {
         ans= getMax(x1,y1,x2,y2);
 
         for (int m = 0; m < M; m++) {
-            int nx1 = x1 + dx[user[0][m]];
-            int ny1 = y1 + dy[user[0][m]];
-            int nx2 = x2 + dx[user[1][m]];
-            int ny2 = y2 + dy[user[1][m]];
-            ans+=getMax(nx1,ny1,nx2,ny2);
+            x1 += dx[user[0][m]];
+            y1 += dy[user[0][m]];
+            x2 += dx[user[1][m]];
+            y2 += dy[user[1][m]];
+            ans+=getMax(x1,y1,x2,y2);
         }
 
     }
@@ -105,12 +105,8 @@ public class Sam5644 {
                 int p = Integer.parseInt(st.nextToken());
                 arr[i] = new Battery(x, y, c, p);
             }
-            move(0, 0, 10, 10);
+            move(1, 1, 10, 10);
             Arrays.sort(arr);
-            for(Battery b : arr){
-                System.out.print(b.p);
-            }
-            System.out.println();
             System.out.println("#" + (t++) + " " + ans);
         }
     }
