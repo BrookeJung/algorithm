@@ -1,7 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Sam5295 {
     //week3
@@ -17,65 +17,69 @@ public class Sam5295 {
         while (T-- > 0) {
             N = Integer.parseInt(br.readLine());
             map = new int[3][N];
-            pick = new boolean[N];
             for (int i = 0; i < 3; i++) {
                 StringTokenizer st = new StringTokenizer(br.readLine());
                 for (int j = 0; j < N; j++) {
                     map[i][j] = Integer.parseInt(st.nextToken());
                 }
             }
-            ans = N; //제거할수있는 수 N이 최대
-            dfs(0);
+            ans=N+1;
+            for (int del = 1; del < N; del++) {
+                row=del;
+                pick = new boolean[N] ;
+                Arrays.fill(pick,true);
+                combi(0, del);
+                if(ans<=N){
+                    break;
+                }
+            }
             System.out.println("#" + (num++) + " " + ans);
         }
     }
 
-    private static void dfs(int cnt) {
-        if (cnt == N) {
-            if (isSameElement()) {
-                ans = Math.min(ans, row);
-                row=N;
+    private static void combi(int start, int r) {
+
+        if (r == 0) {
+            if (isSameElement()) { //빼고나서 same element 통과하면
+                ans =row;
             }
             return;
+        } else {
+            for (int i = start; i < N; i++) {
+                pick[i] = false;
+                combi(i + 1, r - 1);
+                pick[i] = true;
+            }
         }
-        pick[cnt] = false;
-        dfs(cnt + 1);
-        pick[cnt] = true;
-        dfs(cnt + 1);
-
     }
 
     private static boolean isSameElement() {
-        ele1= new boolean[N+1];
-        ele2= new boolean[N+1];
-        int contain = 0;
+        ele1 = new boolean[N+1];
+        ele2 = new boolean[N+1];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < N; j++) {
-                if(!pick[j]){
+                if (!pick[j]) {
                     continue;
                 }
-                if (pick[j]) { //포함할 줄이다.
+                //포함할 줄이다.
                     if (i == 0) { //첫번째 줄이다.
-                        contain++;
-                        ele1[map[i][j]]=true;
-                        ele2[map[i][j]]=true;
-                    } else if(i==1) {
-                        if(!ele1[map[i][j]]){
+                        ele1[map[i][j]] = true;
+                        ele2[map[i][j]] = true;
+                    } else if (i == 1) {
+                        if (!ele1[map[i][j]]) {
                             return false;
-                        }else{
-                            ele1[map[i][j]]=false;
+                        } else {
+                            ele1[map[i][j]] = false;
                         }
-                    } else{
-                        if(!ele2[map[i][j]]){
+                    } else {
+                        if (!ele2[map[i][j]]) {
                             return false;
-                        }else{
-                            ele2[map[i][j]]=false;
+                        } else {
+                            ele2[map[i][j]] = false;
                         }
                     }
                 }
             }
-        }
-        row = N - contain;
         return true;
     }
 
