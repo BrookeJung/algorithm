@@ -6,7 +6,8 @@ import java.util.*;
 public class Sam5644 {
 
     static int[][] map = new int[11][11];
-    static int[] dx = {0, -1, 0, 1, 0}, dy = {0, 0, 1, 0, -1}; //상우하좌
+//    static int[] dx = {0, -1, 0, 1, 0}, dy = {0, 0, 1, 0, -1}; //상우하좌
+    static int[] dx = {0, 0, 1, 0, -1}, dy = {0, -1, 0, 1, 0}; //상우하좌
     static int M, A, ans; //M:이동시간 , A:충전기갯수
     static Battery[] arr;
     static int[][] user;
@@ -32,7 +33,6 @@ public class Sam5644 {
 
     private static void move(int x1, int y1, int x2, int y2) {
         ans= getMax(x1,y1,x2,y2);
-
         for (int m = 0; m < M; m++) {
             x1 += dx[user[0][m]];
             y1 += dy[user[0][m]];
@@ -40,7 +40,6 @@ public class Sam5644 {
             y2 += dy[user[1][m]];
             ans+=getMax(x1,y1,x2,y2);
         }
-
     }
 
     private static int getMax(int nx1, int ny1, int nx2, int ny2) {
@@ -59,12 +58,12 @@ public class Sam5644 {
             }
         }
         int max=0;
-        for(int i=0;i<2;i++){
-            for(int j=0;j<2;j++){
+        for(int i=0;i<container.length;i++){
+            for(int j=0;j<container.length;j++){
                 int p1 = (container[0][i]==null)? 0 : container[0][i].p;
-                int p2 = (container[0][j]==null)? 0 : container[0][j].p;
+                int p2 = (container[1][j]==null)? 0 : container[1][j].p;
                 int sum = p1+p2;
-                if(container[0][i]==(container[1][j])){
+                if(container[0][i]==container[1][j]){
                     sum /=2;
                 }
                 max = Math.max(sum,max);
@@ -74,7 +73,7 @@ public class Sam5644 {
     }
 
     private static boolean isRhombus(int x, int y, int nx, int ny, int c) {
-        if (Math.abs(x - nx) + Math.abs(y - ny) <= c - 1) {
+        if (Math.abs(x - nx) + Math.abs(y - ny) <= c) {
             return true;
         }
         return false;
@@ -99,14 +98,14 @@ public class Sam5644 {
             }
             for (int i = 0; i < A; i++) {
                 st = new StringTokenizer(br.readLine());
-                int y = Integer.parseInt(st.nextToken()); //주어진 맵이 뒤집혀있음
-                int x = Integer.parseInt(st.nextToken());
+                int x = Integer.parseInt(st.nextToken()); //주어진 맵이 뒤집혀있음
+                int y = Integer.parseInt(st.nextToken());
                 int c = Integer.parseInt(st.nextToken());
                 int p = Integer.parseInt(st.nextToken());
                 arr[i] = new Battery(x, y, c, p);
             }
-            move(1, 1, 10, 10);
             Arrays.sort(arr);
+            move(1, 1, 10, 10);
             System.out.println("#" + (t++) + " " + ans);
         }
     }
