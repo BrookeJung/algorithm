@@ -18,7 +18,7 @@ import java.util.*;
 public class Sam5648 {
     static int N, ans;
     static int map[][];
-    static int[] dx = {-1, 1, 0, 0}, dy = {0, 0, -1, 1};
+    static int[] dy = {-1, 1, 0, 0}, dx = {0, 0, -1, 1};
     static List<Spot> list;
 
     static class Spot {
