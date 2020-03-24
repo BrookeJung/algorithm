@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-
+//31/50
 public class Sam5650 {
     static int[][] map;
     static int[][][] visit;
@@ -49,10 +49,13 @@ public class Sam5650 {
                 cnt++;
                 dir = bounceDir[0][dir];
             }//시작점에 돌아왔거나 블랙홀
-            else if ((nx == start.x && ny == start.y) || map[nx][ny] == -1) {
+            else if ((nx == start.x && ny == start.y)) {
+                return;
+            }else if(map[nx][ny] == -1){
                 visit[start.x][start.y][start.dir] = cnt;
                 return;
-            }//방문하려는 곳과 방향이 이미 탐색해본경우
+            }
+            //방문하려는 곳과 방향이 이미 탐색해본경우
             else if (visit[nx][ny][dir] > 0) {
                 cnt += visit[nx][ny][dir];
                 visit[start.x][start.y][start.dir] = cnt;
